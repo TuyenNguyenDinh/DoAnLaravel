@@ -1,3 +1,48 @@
+ul.breadcrumb {
+    padding: 10px 16px;
+    width: 100%;
+    list-style: none;
+    background-color: #eee;
+}
+
+.active {
+    color: #1d7eb6;
+    display: inline;
+    font-size: 14px;
+}
+
+ul.breadcrumb li+li:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    content: "";
+    font-size: 16px;
+    color: #6a7379;
+    padding: 0 15px;
+}
+
+ul.breadcrumb li a {
+    color: #6a7379;
+    font-size: 14px;
+}
+
+ul.breadcrumb li a:hover {
+    color: #1d7eb6;
+    text-decoration: none;
+}
+
 .pagination {
     margin-top: 12px;
+}
+
+@media(max-width: 991px) {
+    .container {
+        padding-top: 34px;
+    }
+}
+
+@media(max-width: 768px) {
+    #body {
+        padding-bottom: 900px;
+    }
 }

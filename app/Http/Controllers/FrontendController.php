@@ -23,6 +23,7 @@ class FrontendController extends Controller
     public function getCategory($id){
         $data['categoryName'] = Category::find($id);
         $data['items'] = Product::where('category_id', $id)->paginate(2);
+        $data['count'] = $data['items']->count();
         return view('frontend.categories',$data);
         dd($data['items']);
     }

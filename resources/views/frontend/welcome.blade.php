@@ -52,7 +52,7 @@
 </div>
 <div id="wrap-inner">
     <div class="products">
-        <div class="products-tab hidden-xs hidden-sm display-flex-center content-space-between">
+        <div class="products-tab hidden-xs display-flex-center content-space-between">
             <ul class="nav nav-pills" style="padding-bottom: 12px;">
                 <li class="nav-item">
                     <a class="nav-link active" href="#hot-products" data-toggle="tab">Sản phẩm nổi bật</a>
