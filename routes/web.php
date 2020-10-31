@@ -21,10 +21,24 @@ Route::get('category/{id}.html', 'FrontendController@getCategory');
 Route::get('search','FrontendController@getSearch');
 
 //Admin Panel
-Route::prefix('admin')->group(function () {
+// Route::prefix('admin')->group(function () {
+//     Route::get('/', function () {
+//         return view('admin.index');
+//     })->name('index')->middleware('checklogin::class');
+//     Route::resource('categories', 'CategoryController');
+//     Route::resource('products', 'ProductController');
+//     Route::resource('users', 'UserController');
+//     Route::resource('customers', 'CustomerController');
+//     Route::resource('bills', 'BillController');
+//     // Route::resource('billdetails', 'BillDetailController');
+//     Route::get('billdetail/{bill_id}.html', 'BillDetailController@getBillDetail');
+// });
+
+
+Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
     Route::get('/', function () {
         return view('admin.index');
-    })->name('index')->middleware('checklogin::class');
+    })->name('index');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
     Route::resource('users', 'UserController');
@@ -36,22 +50,27 @@ Route::prefix('admin')->group(function () {
 
 //Authentication
 Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::resource('products', 'ProductController');
-    Route::resource('users', 'UserController');
-    Route::resource('categories', 'CategoryController');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('index');
+        Route::resource('categories', 'CategoryController');
+        Route::resource('products', 'ProductController');
+        Route::resource('users', 'UserController');
+        Route::resource('customers', 'CustomerController');
+    });
     
     
 });
 
 //Gio hang
-Route::group(['prefix'=>'cart'], function(){
+Route::group(['middleware' => 'checklogin', 'prefix' => 'cart'], function(){
     Route::get('add/{id}', 'CartController@getAddCart');
     Route::get('show','CartController@getShowCart');
     Route::get('delete/{id}', 'CartController@getDeleteCart');
     Route::get('update', 'CartController@getUpdateCart');
     Route::post('show', 'CartController@postComplete');
 });
-
 Route::get('complete', 'CartController@getComplete');
 
 //Login

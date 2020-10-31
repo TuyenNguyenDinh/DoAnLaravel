@@ -3,12 +3,6 @@
     margin: 0;
 }
 
-body {
-    font-family: arial;
-    font-size: 14px;
-    color: #666;
-}
-
 #logo,
 #search,
 #cart {
@@ -70,10 +64,6 @@ body {
         color: white;
         position: absolute;
     }
-}
-
-#body {
-    margin-top: 15px;
 }
 
 
@@ -164,7 +154,6 @@ padding-left: 12px;
 }
 
 .table .form-control {
-    border-radius: 0px;
     padding: 0px 9px;
 }
 
@@ -194,10 +183,6 @@ padding-left: 12px;
     background: #ff9600;
     border-radius: 0px;
     color: #fff;
-}
-
-.form-control {
-    border-radius: 0px;
 }
 
 

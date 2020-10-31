@@ -2,9 +2,18 @@
 @section('title','Chi tiết sản phẩm')
 @section('main')
 <link rel="stylesheet" href="{{asset('css/category.css')}}">
+<ul class="breadcrumb">
+    <li><a href="{{ url('/')}}">Home</a></li>
+    <li><a>Category</a></li>
+    <li class="active">{{$categoryName->name}}</li>
+</ul>
+
 <div id="wrap-inner" class="col-md-12">
     <div class="products">
-        <h3>{{$categoryName->name}}</h3>        
+        <div class="page-title">
+            <h3>{{$categoryName->name}}</h3>
+            <span>Tìm thấy: {{$count}} sản phẩm</span>
+        </div>
         <div class="product-list row">
             @foreach($items as $item)
             <div class="product-item col-md-3 col-sm-6 col-xs-12">
