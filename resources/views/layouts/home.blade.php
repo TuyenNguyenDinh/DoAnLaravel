@@ -40,12 +40,6 @@
             }
         }
 
-        $(window).resize(function() {
-            var w = $(window).width();
-            if (w > 320 && menu.is(':hidden')) {
-                menu.removeAttr('style');
-            }
-        });
 
         function topFunction() {
             $('html, body').animate({
@@ -56,7 +50,7 @@
     </script>
 </head>
 
-<body>
+<body class="preload">
     <div id="container">
         <header>
             <nav id="navbar-header">
@@ -73,18 +67,14 @@
                                                 </a>
                                             </div>
                                             <div class="col-nav nav-menu">
-                                                <div class="stick-nav-home">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-bars"></i>
-                                                        Danh mục
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <ul>
-                                                            @foreach($categories as $category)
-                                                            <li><a class="dropdown-item" href="{{asset('category/'.$category->id.'.html')}}">{{$category->name}}</a></li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
+                                                <button class="dropbtn btn btn-secondary" type="buttom">
+                                                    <i class="fas fa-bars"></i>
+                                                    Danh mục
+                                                </button>
+                                                <div class="dropdown-content">
+                                                    @foreach($categories as $category)
+                                                    <a href="{{asset('category/'.$category->id.'.html')}}">{{$category->name}}</a>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -142,73 +132,69 @@
 
             <nav id="navbar-header-mobile">
                 <div class="navbar navbar-dark header-mobile">
-                    <nav role="navigation">
-                        <!-- <a href="#" class="header-mobile__left_btn">
-                    <i class="fas fa-bars"></i>
-                </a> -->
-                        <div id="menuToggle">
-                            <input type="checkbox">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <ul id="menu" style="box-sizing: content-box;">
-                                <li style="border-bottom: 1px solid ;"><a>
-                                        Danh mục sản phẩm
-                                    </a></li>
-                                @foreach($categories as $category)
-                                <li><a href="{{asset('category/'.$category->id.'.html')}}">{{$category->name}}</a></li>
-                                @endforeach
-                            </ul>
+                    <div class="header-preload">
+                        <button class="header__button" id="btnNav" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                    <nav class="nav">
+                        <div class="nav__links">
+                            @foreach ($categories as $category)
+                            <a href="{{asset('category/'.$category->id.'.html')}}" class="nav__link">
+                                {{$category->name}}
+                            </a>
+                            @endforeach
                         </div>
+                        <div class="nav__overlay"></div>
                     </nav>
-
                     <div class="header-mobile-logo">
                         <a href="{{ url('/') }}">
                             <img src="{{asset('image/logo.png')}}" alt="shopA_Z" height="38px" width="144px">
                         </a>
                     </div>
-                    <a class="header-mobile__right_btn" onclick="openNav()" style="color: white;">
-                        <i class="fa fa-user"></i>
-                    </a>
-                </div>
-                <div id="mySidenav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <ul>
-                        <li>
-                            @guest
-                            <a href="{{route('login')}}">Đăng nhập</a>
-                            @if (Route::has('register'))
-                            <a href="{{route('register')}}" style="border-top: 1px solid ;">Đăng ký</a>
-                            @endif
-                            @else
-                            <div class="header-profile__avt">
-                                <div class="header-profile__avt-image">
-                                    <a class="account_current_user">
-                                        <img src="{{asset('image/avt.jpg')}}">
-                                    </a>
+                    <div class="header-preload1">
+                        <nav class="nav1">
+                            <div class="nav__links1">
+                                @guest
+                                <a href="{{route('login')}}" class="nav__link1">Đăng nhập</a>
+                                @if (Route::has('register'))
+                                <a href="{{route('register')}}" class="nav__link1" style="border-top: 1px solid ;">Đăng ký</a>
+                                @endif
+                                @else
+                                <div class="header-profile__avt">
+                                    <div class="header-profile__avt-image">
+                                        <a class="account_current_user">
+                                            <img src="{{asset('image/avt.jpg')}}">
+                                        </a>
+                                    </div>
+                                    <div class="header-profile__avt-name">
+                                        {{ Auth::user()->name }}
+                                    </div>
+                                    <div class="header-profile__avt-email">
+                                        {{ Auth::user()->email }}
+                                    </div>
                                 </div>
-                                <div class="header-profile__avt-name">
-                                    {{ Auth::user()->name }}
-                                </div>
-                                <div class="header-profile__avt-email">
-                                    {{ Auth::user()->email }}
-                                </div>
-                            </div>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a href="{{asset('cart/show')}}" class="nav__link1">
+                                    <i class="fas fa-shopping-cart"></i> Giỏ hàng ({{Cart::count()}})
+                                </a>
+                                <a href="{{ route('logout') }}" class="nav__link1" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" style="color: white;">
-                                {{ __('Logout') }}
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                @endguest
+                            </div>
+                            <div class="nav__overlay1"></div>
+                        </nav>
+                        <button class="header__button1" id="btnNav1" type="button">
+                            <a class="header-mobile__right_btn" style="color: white;">
+                                <i class="fa fa-user"></i>
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                            @endguest
-                        </li>
-                    </ul>
-                    <a href="{{asset('cart/show')}}">
-                        <i class="fas fa-shopping-cart"></i> Giỏ hàng ({{Cart::count()}})
-                    </a>
+                        </button>
+                    </div>
                 </div>
-
                 <div class="header-mobile-search">
                     <div class="col-md-12">
                         <form action="{{asset('search/')}}" method="GET" class="full-width">
@@ -285,15 +271,41 @@
 </body>
 
 <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "50%";
-    }
+    window.addEventListener("load", () => {
+        document.body.classList.remove("preload");
+    });
 
-    /* Set the width of the side navigation to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector(".nav1");
+
+        document.querySelector("#btnNav1").addEventListener("click", () => {
+            nav.classList.add("nav--open1");
+        });
+
+        document.querySelector(".nav__overlay1").addEventListener("click", () => {
+            nav.classList.remove("nav--open1");
+        });
+    });
 </script>
+<script>
+    window.addEventListener("load", () => {
+        document.body.classList.remove("preload");
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector(".nav");
+
+        document.querySelector("#btnNav").addEventListener("click", () => {
+            nav.classList.add("nav--open");
+        });
+
+        document.querySelector(".nav__overlay").addEventListener("click", () => {
+            nav.classList.remove("nav--open");
+        });
+    });
+</script>
+
+
 
 
 </html>

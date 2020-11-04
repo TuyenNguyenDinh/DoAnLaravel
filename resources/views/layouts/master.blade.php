@@ -19,8 +19,6 @@
     <script src="{{asset('js/lumino.glyphs.js')}}"></script>
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    
-    
 </head>
 <body>
 </body>

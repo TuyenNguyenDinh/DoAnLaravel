@@ -13,6 +13,10 @@
         );
     }
 </script>
+<ul class="breadcrumb">
+    <li><a href="{{ url('/')}}">Home</a></li>
+    <li class="breadcrumb-active">Giỏ hàng</li>
+</ul>
 <div id="wrap-inner">
     <div id="list-cart">
         <h3>Giỏ hàng</h3>

@@ -342,3 +342,36 @@ nav a#pull {
     background: #d9534f;
     border-color: #d43f3a;
 }
+
+ul.breadcrumb {
+    padding: 10px 16px;
+    width: 100%;
+    list-style: none;
+    background-color: #eee;
+}
+
+.breadcrumb-active {
+    color: #1d7eb6;
+    display: inline;
+    font-size: 14px;
+}
+
+ul.breadcrumb li+li:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    content: "";
+    font-size: 16px;
+    color: #6a7379;
+    padding: 0 15px;
+}
+
+ul.breadcrumb li a {
+    color: #6a7379;
+    font-size: 14px;
+}
+
+ul.breadcrumb li a:hover {
+    color: #1d7eb6;
+    text-decoration: none;
+}
