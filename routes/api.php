@@ -21,6 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function(){
     Route::get('categories', 'CategoryController@Index');
     Route::get('categories/{id}', 'CategoryController@show');
-    Route::resource('products', 'ProductController');
-    Route::resource('customers', 'CustomerController');
+    Route::post('categories/create', 'CategoryController@store');
+    Route::put('categories/update/{id}', 'CategoryController@update');
+    Route::post('categories/delete/{id}', 'CategoryController@destroy');
+
+    // Route::resource('products', 'ProductController');
+    // Route::resource('customers', 'CustomerController');
 });
