@@ -38,7 +38,6 @@ Route::get('search','FrontendController@getSearch');
 
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
-    Alert::success('Success Title', 'Success Message');
     Route::get('/', function () {
         return view('admin.index');
     })->name('index');
@@ -53,8 +52,6 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
 
 //Authentication
 Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Alert::success('Success Title', 'Success Message');
-
     Route::prefix('admin')->group(function () {
         Route::get('/', function () {
             return view('admin.index');
@@ -68,7 +65,6 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin', 'namespace'
 
 //Gio hang
 Route::group(['middleware' => 'checklogin', 'prefix' => 'cart'], function(){
-    Alert::success('Success Title', 'Success Message');
     Route::get('add/{id}', 'CartController@getAddCart');
     Route::get('show','CartController@getShowCart');
     Route::get('delete/{id}', 'CartController@getDeleteCart');

@@ -2,7 +2,7 @@
 namespace App\Repositories;
 use App\Models\Product;
 
-class ProductRepository extends BaseRepository{
+class ProductRepository extends EloquentRepository{
     protected $product;
 
     public function __construct(Product $product)

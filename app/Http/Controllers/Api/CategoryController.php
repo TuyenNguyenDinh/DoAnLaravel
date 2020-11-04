@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Repositories\CategoryEloquentRepository;
 use Illuminate\Support\Facades\Response;
 
 class CategoryController extends Controller
 {
+
+    protected $categories;
+
+    public function __construct(CategoryEloquentRepository $categories)
+    {
+        $this->categories = $categories;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +25,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+
+        $result = $this->categories->getAll();
         return api_success(
-            array('data' => Category::all())
+            array('data' => $result)
         );
     }
 
@@ -29,7 +40,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $result = $this->categories->create($data);
+        return api_success(
+            array('data' => $result)
+        );
     }
 
     /**
@@ -40,9 +55,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $categories = Category::findOrFail($id);
+       $result = $this->categories->find($id);
         return api_success(
-            array('data' => $categories->products)
+            array('data' => $result)
         );
     }
 
@@ -55,7 +70,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $result = $this->categories->update($id, $data);
+
+        return api_success(
+            array('data' => $result)
+        );
     }
 
     /**
@@ -66,6 +87,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->categories->delete($id);
+        return api_success(
+            array('data' => "ok")
+        );
     }
 }
