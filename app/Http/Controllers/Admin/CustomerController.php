@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
-use App\Models\Product;
-use App\Http\Requests\UserRequest;
-use App\Models\Category;
 use App\Models\Customer;
-use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as FacadesDB;
+
 
 class CustomerController extends Controller
 {
+
+    protected $customers;
+
+    public function __construct()
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      *
