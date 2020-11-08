@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\BillDetail;
-use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
+
 
 class BillDetailController extends Controller
 {

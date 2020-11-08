@@ -6,11 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB as FacadesDB;
+use App\Repositories\ProductEloquentRepository;
+
 
 class ProductController extends Controller
 {
+
+    protected $products;
+
+    public function __construct(ProductEloquentRepository $products)
+    {
+        $this->products = $products;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +25,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = $this->products->getAll();
         $products = Product::paginate(2);
         $categories = Category::all();
         return view('admin.products.index', array('products' => $products, 'categories' =>$categories));
@@ -45,7 +52,9 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $fileName = $this->doUpload($request);
-        $products = Product::create(array_merge($request->all(), ["anh" =>$fileName]));
+        $data = array_merge($request->all(), ["anh" => $fileName]);
+        $products = $this->products->create($data);
+        // $products = Product::create(array_merge($request->all(), ["anh" =>$fileName]));
         if ($products) {
             return redirect()->route('products.index');
         }
@@ -108,8 +117,10 @@ class ProductController extends Controller
     {
 
         $fileName = $this->doUpload($request);
-        $products = Product::find($id);
-        $products->update(array_merge($request->all(), ["anh" =>$fileName]));
+        $data = array_merge($request->all(), ["anh" => $fileName]);
+        $products = $this->products->update($id, $data);
+        // $products = Product::find($id);
+        // $products->update(array_merge($request->all(), ["anh" =>$fileName]));
         if($products){
             return redirect()->route('products.index');
         }
@@ -124,8 +135,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        $this->products->delete($id);
         return redirect()->route('products.index');
     }
 }

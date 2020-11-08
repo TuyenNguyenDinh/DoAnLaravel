@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Repositories\CustomerEloquentRepository;
 
 class CustomerController extends Controller
 {
+    
+    protected $customers;
+
+    public function __construct(CustomerEloquentRepository $customers)
+    {
+        $this->customers = $customers;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +24,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
+
+        $result = $this->customers->getAll();
         return api_success(
-            array('data' => Customer::all())
+            array('data' => $result)
         );
     }
 
@@ -28,7 +39,12 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $result = $this->customers->create($data);
+
+        return api_success(
+            array('data' => $result)
+        );
     }
 
     /**
@@ -39,9 +55,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customers = Customer::findOrFail($id);
+        $result = $this->customers->find($id);
         return api_success(
-            array('data' => $customers)
+            array('data' => $result)
         );
     }
 
@@ -54,7 +70,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $result = $this->customers->update($id, $data);
+
+        return api_success(
+            array('data' => $result)
+        );
     }
 
     /**
@@ -65,6 +87,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->customers->delete($id);
+
+        return api_success(
+            array('data' =>"ok")
+        );
     }
 }

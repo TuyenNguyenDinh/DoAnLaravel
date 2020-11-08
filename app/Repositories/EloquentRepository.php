@@ -15,13 +15,13 @@ abstract class EloquentRepository
     }
 
   
-    abstract public function getModel();
+    abstract public function getClassModel();
 
    
     public function setModel()
     {
         $this->_model = app()->make(
-            $this->getModel()
+            $this->getClassModel()
         );
     }
 

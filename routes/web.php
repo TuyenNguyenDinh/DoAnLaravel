@@ -22,25 +22,10 @@ Route::get('detail/{id}.html', 'FrontendController@getDetail');
 Route::get('category/{id}.html', 'FrontendController@getCategory');
 Route::get('search','FrontendController@getSearch');
 
-//Admin Panel
-// Route::prefix('admin')->group(function () {
-//     Route::get('/', function () {
-//         return view('admin.index');
-//     })->name('index')->middleware('checklogin::class');
-//     Route::resource('categories', 'CategoryController');
-//     Route::resource('products', 'ProductController');
-//     Route::resource('users', 'UserController');
-//     Route::resource('customers', 'CustomerController');
-//     Route::resource('bills', 'BillController');
-//     // Route::resource('billdetails', 'BillDetailController');
-//     Route::get('billdetail/{bill_id}.html', 'BillDetailController@getBillDetail');
-// });
 
 
-Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
-    Route::get('/', function () {
-        return view('admin.index');
-    })->name('index');
+
+Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function(){
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
     Route::resource('users', 'UserController');
@@ -50,8 +35,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
     Route::get('billdetail/{bill_id}.html', 'BillDetailController@getBillDetail');
 });
 
-//Authentication
-Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin', 'namespace' => 'Admin'], function () {
+// //Authentication
+Route::group(['middleware' => ['web', 'admin'],'namespace' => 'Admin'], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', function () {
             return view('admin.index');
@@ -63,7 +48,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin', 'namespace'
     });
 });
 
-//Gio hang
+// //Gio hang
 Route::group(['middleware' => 'checklogin', 'prefix' => 'cart'], function(){
     Route::get('add/{id}', 'CartController@getAddCart');
     Route::get('show','CartController@getShowCart');

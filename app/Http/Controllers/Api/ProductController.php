@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Repositories\ProductEloquentRepository;
 
 class ProductController extends Controller
 {
+
+
+    protected $products;
+
+    public function __construct(ProductEloquentRepository $products){
+        $this->products = $products;   
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +23,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $result = $this->products->getAll();
         return api_success(
-            array('data' => Product::all())
+            array('data' => $result)
         );
     }
 
@@ -28,7 +37,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $result = $this->products->create($data);
+
+        return api_success(
+            array('data' => $result)
+        );
     }
 
     /**
@@ -39,9 +53,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $products = Product::findOrFail($id);
+        $result = $this->products->find($id);
         return api_success(
-            array('data' => $products)
+            array('data' => $result)
         );
     }
 
@@ -54,7 +68,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $result = $this->products->update($id, $data);
+
+        return api_success(
+            array('data' => $result)
+        );
     }
 
     /**
@@ -65,6 +85,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = $this->products->delete($id);
+
+        return api_success(
+            array('data' => "ok")
+        );
     }
 }

@@ -5,11 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\CategoryEloquentRepository;
+
 
 class CategoryController extends Controller
 {
+    protected $categories;
+
+    public function __construct(CategoryEloquentRepository $categories)
+    {
+        $this->categories = $categories;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +23,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', array('categories' => $categories));
+        $result = $this->categories->getAll();
+        return view('admin.categories.index', array('categories' => $result));
     }
 
     /**
@@ -40,8 +46,10 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $categories = Category::create($request->all());
-        if ($categories) {
+        $data = $request->all();
+
+        $result = $this->categories->create($data);
+        if ($result) {
             return redirect()->route('categories.index');
         }
         return redirect()->route('categories.create');
@@ -79,9 +87,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $categories = Category::find($id);
-        $categories->update($request->all());
-        if($categories){
+        $data = $request->all();
+        $result = $this->categories->update($id, $data);
+        if($result){
             return redirect()->route('categories.index');
         }
         return redirect()->route('categories.edit');
@@ -95,8 +103,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $categories = Category::find($id);
-        $categories->delete();
+        $this->categories->delete($id);
         return redirect()->route('categories.index');
     }
 }
