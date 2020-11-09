@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('title','Chi tiết sản phẩm')
 @section('main')
-<link rel="stylesheet" href="{{asset('css/details.css')}}">
+<link rel="stylesheet" href="{{asset('css/frontend/details.css')}}">
 <div id="wrap-inner" class="col-md-10" style="padding-top: 26px;">
     <div id="row list-product-info">
         <div class="clearfix"></div>

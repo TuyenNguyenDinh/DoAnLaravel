@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('title','Chi tiết sản phẩm')
 @section('main')
-<link rel="stylesheet" href="{{asset('css/category.css')}}">
+<link rel="stylesheet" href="{{asset('css/frontend/category.css')}}">
 <ul class="breadcrumb">
     <li><a href="{{ url('/')}}">Home</a></li>
     <li><a>Category</a></li>

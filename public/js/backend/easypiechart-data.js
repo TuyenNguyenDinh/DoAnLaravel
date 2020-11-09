@@ -20,11 +20,10 @@ $(function() {
 });
 
 $(function() {
-   $('#easypiechart-blue').easyPieChart({
-       scaleColor: false,
-       barColor: '#30a5ff'
-   });
+    $('#easypiechart-blue').easyPieChart({
+        scaleColor: false,
+        barColor: '#30a5ff'
+    });
 });
 
-$('#calendar').datepicker({
-	});
+$('#calendar').datepicker({});

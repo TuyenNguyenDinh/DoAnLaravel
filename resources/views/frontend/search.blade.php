@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('title','Tìm kiếm')
 @section('main')
-<link rel="stylesheet" href="{{asset('css/search.css')}}">
+<link rel="stylesheet" href="{{asset('css/frontend/search.css')}}">
 <div id="wrap-inner" class="col-md-12">
     <div class="products">
         <h3>Tìm kiếm với từ khóa: <span>{{$keyword}}</span></h3>

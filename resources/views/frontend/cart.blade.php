@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('title','Giỏ hàng')
 @section('main')
-<link rel="stylesheet" href="{{asset('css/cart.css')}}">
+<link rel="stylesheet" href="{{asset('css/frontend/cart.css')}}">
 <script type="text/javascript">
     function updateCart(qty, rowId){
         $.get(

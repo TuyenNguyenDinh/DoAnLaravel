@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.frontend.css')}}">
-    <link rel="stylesheet" href="{{asset('css/home.css')}}">
-    <link rel="stylesheet" href="{{asset('css/footer.css')}}">
+    <link rel="stylesheet" href="{{asset('css/frontend/bootstrap.min.frontend.css')}}">
+    <link rel="stylesheet" href="{{asset('css/frontend/home.css')}}">
+    <link rel="stylesheet" href="{{asset('css/frontend/footer.css')}}">
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/frontend/jquery-3.2.1.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/frontend/bootstrap.min.js')}}"></script>
 
 
     <script type="text/javascript">
