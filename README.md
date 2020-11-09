@@ -1,4 +1,4 @@
-<p align="center"><img src="https://drive.google.com/file/d/1gaaza2qHQNARPgC3AU0qyYTogS3CmVIj/view?usp=sharing" width="400"></p>
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Hardwell_Logo.png" width="400"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
