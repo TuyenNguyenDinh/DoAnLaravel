@@ -27,4 +27,6 @@ class AppServiceProvider extends ServiceProvider
         $data['categories'] = Category::all();
         view()->share($data);
     }
+
+    
 }

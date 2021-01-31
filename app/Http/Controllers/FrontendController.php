@@ -26,7 +26,7 @@ class FrontendController extends Controller
         $data['items'] = Product::where('category_id', $id)->paginate(2);
         $data['count'] = $data['items']->count();
         return view('frontend.categories',$data);
-        dd($data['items']);
+        // dd($data['items']);
     }
 
     public function getSearch(Request $request){

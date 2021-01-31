@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryEloquentRepository;
 use Illuminate\Support\Facades\Response;
@@ -27,10 +28,13 @@ class CategoryController extends Controller
     {
 
         $result = $this->categories->getAll();
-        return api_success(
-            array('data' => $result)
-        );
+        // return api_success(
+        //     array('data' => $result)
+        // );
+        return response()->json($result);
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -59,6 +63,18 @@ class CategoryController extends Controller
         return api_success(
             array('data' => $result)
         );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showById($id){
+        $result = $this->categories->find($id);
+        return response()->json($result->products);
     }
 
     /**
@@ -92,4 +108,5 @@ class CategoryController extends Controller
             array('data' => "ok")
         );
     }
+
 }

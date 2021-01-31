@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Repositories\ProductEloquentRepository;
+use App\Repositories\BillDetailsEloquentRepo;
 
-class ProductController extends Controller
+class BillDetailsController extends Controller
 {
+    protected $billdetails;
 
-    protected $products;
-
-    public function __construct(ProductEloquentRepository $products){
-        $this->products = $products;   
+    public function __construct(BillDetailsEloquentRepo $billdetails)
+    {
+        $this->billdetails = $billdetails;
     }
     /**
      * Display a listing of the resource.
@@ -22,11 +21,21 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $result = $this->products->getAll();
+        $result = $this->billdetails->getAll();
         // return api_success(
         //     array('data' => $result)
         // );
         return response()->json($result);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -38,11 +47,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $result = $this->products->create($data);
+        $result = $this->billdetails->create($data);
 
-        return api_success(
-            array('data' => $result)
-        );
+        return response()->json($result);
     }
 
     /**
@@ -53,10 +60,19 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $result = $this->products->find($id);
-        return api_success(
-            array('data' => $result)
-        );
+        $result = $this->billdetails->find($id);
+        return response()->json($result);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -68,13 +84,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-
-        $result = $this->products->update($id, $data);
-
-        return api_success(
-            array('data' => $result)
-        );
+        //
     }
 
     /**
@@ -85,16 +95,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->products->delete($id);
-
-        return api_success(
-            array('data' => "ok")
-        );
-    }
-
-    public function search(Request $request){
-        $key_word = $request->input('q');
-        $products = Product::where('ten', 'like', "%$key_word%")->get();
-        return response()->json($products);
+        //
     }
 }

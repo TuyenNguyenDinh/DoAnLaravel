@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>Shop A-Z</title>
     <link rel="stylesheet" href="{{asset('css/frontend/bootstrap.min.frontend.css')}}">
     <link rel="stylesheet" href="{{asset('css/frontend/home.css')}}">
     <link rel="stylesheet" href="{{asset('css/frontend/footer.css')}}">

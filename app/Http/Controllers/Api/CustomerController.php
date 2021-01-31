@@ -26,9 +26,10 @@ class CustomerController extends Controller
     {
 
         $result = $this->customers->getAll();
-        return api_success(
-            array('data' => $result)
-        );
+        // return api_success(
+        //     array('data' => $result)
+        // );
+        return response()->json($result);
     }
 
     /**
@@ -42,9 +43,7 @@ class CustomerController extends Controller
         $data = $request->all();
         $result = $this->customers->create($data);
 
-        return api_success(
-            array('data' => $result)
-        );
+        return response()->json($result);
     }
 
     /**
@@ -56,9 +55,7 @@ class CustomerController extends Controller
     public function show($id)
     {
         $result = $this->customers->find($id);
-        return api_success(
-            array('data' => $result)
-        );
+        return response()->json($result);
     }
 
     /**
