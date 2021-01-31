@@ -42,9 +42,9 @@ Route::namespace('Api')->group(function () {
     Route::post('customers/delete/{id}', 'CustomerController@destroy')->where('id', '[0-9]+');;
 
     
-    Route::get('oders', 'BillController@index');
+    Route::get('orders', 'BillController@index');
     Route::post('orders/create', 'BillController@created');
-    Route::get('oders/{id}', 'BillController@show');
+    Route::get('orders/{id}', 'BillController@show');
 
     Route::get('orderdetails', 'BillDetailsController@index');
     Route::post('orderdetails/create', 'BillDetailsController@store');
